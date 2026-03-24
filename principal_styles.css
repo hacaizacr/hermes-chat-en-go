@@ -1,0 +1,827 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0c192c;
+    /*background-color: #d6edff;*/
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    color: #333;
+}
+/*burbujitas*/
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+.bubbles {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.bubbles span {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: #4fc3dc;
+    margin: 0 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #3dbbd144,
+    0 0 50px #3dbbd1,
+    0 0 100px #3dbbd1;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(125s / var(--i));
+}
+.bubbles span:nth-child(even) {
+    background: #ffffff;
+    box-shadow: 0 0 0 10px #ffffff44,
+    0 0 50px #ffffff,
+    0 0 100px #ffffff;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(125s / var(--i));
+}
+@keyframes animate {
+    0% {
+        transform: translateY(100vh) scale(0);
+    }
+    100% {
+        transform: translateY(-10vh) scale(1);
+    }
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(243, 235, 235, 0.804);
+    backdrop-filter: blur(60px);
+    display: flex; 
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+
+    /*hacerlo fijo*/
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+
+nav a:hover {
+    color: #58acc8;
+}
+
+@media (max-width: 430px) {
+    header,nav {
+        flex-direction: column;
+    }
+    nav {
+        margin-top: 15px;
+        align-items: center;
+    }
+}
+
+.hermes-logo {
+    height: 1.2em;
+    vertical-align: middle;
+    /*margin-right: 15px; (por si pongo el nombre y no el h1)*/
+}
+
+.section1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-family: 'Nunito Sans', serif;
+    font-size: 130px;
+    line-height: 1.3;
+    font-weight: bold;
+    color: #31bbe9;
+    text-align: center;
+    text-transform: uppercase;
+  /*Sombrita*/
+  
+}
+
+h2 {
+    color: white;
+    text-align: center;
+    font-weight: 300;
+    padding-bottom: 5%;
+}
+
+.crearsala{
+    text-align: center;
+    padding: 0.6em 1.2em;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: #191d23;
+    background-color: #31bbe9;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: relative;
+    transition: box-shadow 0.4s ease-in-out, background-color 0.4s ease-in-out;
+}
+
+.navegador-activo{
+    color: #58acc8;    
+}
+
+/*SECCION 2*/
+
+.section2 {
+
+    min-height: 100vh;
+
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    padding: 100px 10%;
+
+    position: relative; 
+    z-index: 10; 
+}
+
+.text-content {
+    flex: 1;
+    max-width: 500px;
+}
+
+.text-content h2 {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: #1a1a1a;
+    margin-bottom: 25px;
+}
+
+.text-content p {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* --- Estilos del Mockup*/
+.visual-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.mockup-card {
+    width: 380px;
+    background: #f9f9f9;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid #eee;
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+.mockup-card:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+
+.mockup-header {
+    background: #e0e0e0;
+    padding: 15px;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+/* Cuerpo de la tarjeta */
+.mockup-body {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mockup-field label {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.fake-input {
+    background: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    color: #333;
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+.fake-btn {
+    background: #008CBA;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0, 140, 186, 0.3);
+}
+
+/* --- Responsividad (Celulares) --- */
+@media (max-width: 900px) {
+    .section2 {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 5%;
+        gap: 50px;
+    }
+    
+    .text-content h2 {
+        font-size: 2.5rem;
+    }
+}
+
+/*SECCION 3*/
+
+.section3 {
+    min-height: 100vh;
+    background-color: #0f172a; 
+    color: #ffffff;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 5%;
+    position: relative;
+    z-index: 20; 
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.security-container {
+    text-align: center;
+    max-width: 900px;
+}
+
+.icon-glow {
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.lock-icon {
+    width: 80px;
+    height: 80px;
+    color: #4fc3dc;
+    filter: drop-shadow(0 0 15px rgba(79, 195, 220, 0.6));
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(79, 195, 220, 0.6)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(79, 195, 220, 0.9)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(79, 195, 220, 0.6)); }
+}
+
+
+.section3 h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;  
+    -webkit-text-fill-color: transparent;
+    color: transparent; 
+}
+
+.security-subtitle {
+    font-size: 1.5rem;
+    color: #94a3b8; 
+    margin-bottom: 60px;
+    font-weight: 300;
+}
+
+.security-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+
+.sec-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 16px;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    text-align: left;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.sec-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #4fc3dc;
+}
+
+.sec-card h3 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.sec-card p {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+/* Responsividad para celulares */
+@media (max-width: 768px) {
+    .section3 h2 {
+        font-size: 2.5rem;
+    }
+    .security-subtitle {
+        font-size: 1.1rem;
+    }
+}
+
+/*SECCION 4*/
+
+.section4 {
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 5%;
+    overflow: hidden;
+    gap: 50px;
+}
+
+
+.personalization-text {
+    flex: 1;
+    max-width: 500px;
+    z-index: 2; 
+}
+
+.section4 h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 3.5rem;
+    color: #111;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.section4 p {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+.feature-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pill {
+    background: #fff;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.emoji-showcase {
+    flex: 1;
+    height: 500px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji-rain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.emoji-rain span {
+    position: absolute;
+    bottom: -50px;
+    left: calc(var(--i) * 1%);
+    font-size: 3rem;
+    animation: floatEmoji 6s linear infinite;
+    animation-delay: calc(var(--d) * 1s);
+    opacity: 0;
+}
+
+@keyframes floatEmoji {
+    0% {
+        transform: translateY(0) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-600px) scale(1.2) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+/* Chat Simulado en el centro (Estático) */
+.chat-bubble-mockup {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+    z-index: 5;
+}
+
+.msg-received, .msg-sent {
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-family: sans-serif;
+    font-size: 1rem;
+    max-width: 80%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.msg-received {
+    background: white;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.msg-sent {
+    background: #4fc3dc; 
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    animation-delay: 1s;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsividad */
+@media (max-width: 900px) {
+    .section4 {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .feature-pills {
+        justify-content: center;
+    }
+    
+    .emoji-showcase {
+        width: 100%;
+        height: 400px;
+    }
+}
+
+
+/* SECCIÓN 5: TECNOLOGÍA */
+
+
+.section5 {
+    min-height: 80vh;
+    background-color: #0f172a; 
+    color: #ffffff;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 5%;
+    position: relative;
+    z-index: 5;
+}
+
+.tech-header {
+    text-align: center;
+    max-width: 700px;
+    margin-bottom: 60px;
+}
+
+.tech-header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.tech-header p {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.tech-grid {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.tech-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tech-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #4fc3dc;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+}
+
+.icon-box {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-box svg {
+    width: 40px;
+    height: 40px;
+}
+
+
+.go-color { 
+    background-color: rgba(0, 173, 216, 0.1);
+    color: #00add8; 
+}
+
+.html-color { 
+    background-color: rgba(227, 76, 38, 0.1);
+    color: #ff8a65;
+}
+
+.socket-color { 
+    background-color: rgba(46, 164, 79, 0.1);
+    color: #4ade80;
+}
+
+.tech-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.tech-card p {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .section5 { padding: 60px 5%; }
+    .tech-header h2 { font-size: 2.2rem; }
+}
+
+/*FOOTER*/
+
+footer {
+    background-color: #020617; 
+    color: #94a3b8;
+    padding-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.95rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+
+.footer-brand {
+    flex: 2; 
+    min-width: 250px;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.brand-logo img {
+    height: 35px;
+    width: auto;
+}
+
+.brand-logo span {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.footer-brand p {
+    line-height: 1.6;
+    max-width: 350px;
+    color: #64748b;
+}
+
+/* --- Columnas de Enlaces --- */
+.footer-links {
+    flex: 1;
+    min-width: 150px;
+}
+
+.footer-links h3 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #94a3b8;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #4fc3dc; 
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    margin-top: 60px;
+    padding: 20px 5%;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #000000;
+}
+
+.footer-bottom p {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.footer-bottom strong {
+    color: #e2e8f0;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .footer-brand {
+        text-align: center;
+        align-items: center;
+    }
+
+    .brand-logo {
+        justify-content: center;
+    }
+    
+    .footer-brand p {
+        margin: 0 auto;
+    }
+
+    .footer-links {
+        text-align: center;
+    }
+}
+
+/* ================================================= */
+/* ESTADO OSCURO DEL HEADER (TEXTO TRANSLÚCIDO)      */
+/* ================================================= */
+
+header.modo-oscuro {
+    /* El fondo del header sigue siendo blanco lechoso */
+    background-color: rgba(255, 255, 255, 0.8); 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* AQUÍ ESTÁ EL CAMBIO PARA EL TEXTO */
+header.modo-oscuro nav a {
+    /* En lugar de negro sólido, usamos negro con 60% de opacidad */
+    color: rgba(0, 0, 0, 0.6); 
+    
+    font-weight: 600; /* Un poco más grueso para que se lea bien al ser transparente */
+    transition: color 0.3s ease;
+}
+
+/* Efecto Hover: Al pasar el mouse, el texto se vuelve sólido */
+header.modo-oscuro nav a:hover {
+    color: rgba(0, 0, 0, 1); /* Negro puro al 100% */
+}
+
+/* Para el enlace activo ("Home"), lo dejamos con tu azul pero también un poco translúcido */
+header.modo-oscuro nav a.navegador-activo {
+    color: rgba(0, 140, 186, 0.8); /* Tu azul corporativo al 80% */
+}
+
+/* Ajuste para el logo si es necesario */
+header.modo-oscuro .hermes-logo {
+    /* Baja la opacidad del logo para que coincida con el texto */
+    opacity: 0.7; 
+    filter: invert(1); /* Mantiene la inversión si tu logo original es blanco */
+}

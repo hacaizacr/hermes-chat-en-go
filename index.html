@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <meta charset="UTF-8" />
+
+    <title>| Hermes Chat</title>
+
+    <link rel="icon" type="image/png" href="hermes.png">
+
+    <style>
+    body {
+        background: #0c192c; /* fondo celeste suave */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #004d40;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
+
+    .container {
+        margin-top: 40px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        max-width: 600px;
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+        color: #31bbe9;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #b2ebf2;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    button {
+        background-color: #31bbe9;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    button:hover {
+        background-color: #008ba3;
+    }
+
+    #chat {
+        margin-top: 20px;
+    }
+
+    #mensajes {
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #b2ebf2;
+        background-color: #f0f9ff;
+        border-radius: 6px;
+        margin-bottom: 10px;
+    }
+
+    #mensajes p {
+        margin: 5px 0;
+        padding: 8px;
+        background-color: #e1f5fe;
+        border-radius: 5px;
+    }
+
+    @media screen and (max-width: 600px) {
+        .container {
+            padding: 20px;
+            margin: 20px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Hermes Chat</h1>
+
+    <label>Apodo:</label>
+    <input type="text" id="apodo" />
+
+    <label>Nombre de Sala:</label>
+    <input type="text" id="sala" />
+
+    <label>Contraseña de Sala:</label>
+    <input type="password" id="clave" />
+
+    <button id="conectarBtn" onclick="conectar()">Conectar</button>
+    
+
+    <br><br>
+
+    <div id="chat" style="display:none;">
+        <div id="mensajes"></div>
+        <input type="text" id="mensaje" placeholder="Escribe un mensaje... " />
+        <button id="enviarBtn" onclick="enviarMensaje()">Enviar</button>
+
+    </div>
+
+    <script>
+        let socket;
+        //ENTER-------------------------------------------------------------
+        let isConnected = false; // Variable para rastrear el estado de la conexión
+
+            // Obtener referencias a los elementos al cargar la página
+        const apodoInput = document.getElementById('apodo');
+        const salaInput = document.getElementById('sala');
+        const claveInput = document.getElementById('clave');
+        const conectarButton = document.getElementById('conectarBtn');
+        const mensajeInput = document.getElementById('mensaje');
+        const enviarButton = document.getElementById('enviarBtn');
+
+            // Función que maneja el Enter antes de la conexión
+        function handlePreConnectEnter(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita el envío del formulario o comportamiento por defecto
+                conectarButton.click(); // Simula el clic en el botón Conectar
+            }
+        }
+
+            // Función que maneja el Enter después de la conexión
+        function handlePostConnectEnter(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita un salto de línea si fuera un textarea, o envío de formulario
+                enviarButton.click(); // Simula el clic en el botón Enviar
+            }
+        }
+
+            // Asigna el manejador inicial de Enter a los campos de conexión
+        apodoInput.addEventListener('keypress', handlePreConnectEnter);
+        salaInput.addEventListener('keypress', handlePreConnectEnter);
+        claveInput.addEventListener('keypress', handlePreConnectEnter);
+        //---------------------------------------------------------------
+
+        function conectar() {
+            const apodo = document.getElementById("apodo").value.trim();
+            const sala = document.getElementById("sala").value.trim();
+            const clave = document.getElementById("clave").value.trim();
+
+            if (apodo === "" || sala === "" || clave === "") {
+                alert("Por favor, llena todos los campos (Apodo, Nombre de Sala y Contraseña).");
+                return;
+            }
+            
+            socket = new WebSocket(`ws://192.168.234.5:8080/ws?apodo=${apodo}&sala=${sala}&clave=${clave}`);
+
+
+            socket.onopen = () => {
+                document.getElementById("chat").style.display = "block";
+                isConnected = true
+
+                apodoInput.removeEventListener('keypress', handlePreConnectEnter);
+                salaInput.removeEventListener('keypress', handlePreConnectEnter);
+                claveInput.removeEventListener('keypress', handlePreConnectEnter);
+
+                mensajeInput.addEventListener('keypress', handlePostConnectEnter);
+
+                mensajeInput.focus();
+
+            };
+
+            socket.onmessage = (event) => {
+                const mensajes = document.getElementById("mensajes");
+                const p = document.createElement("p");
+                p.textContent = event.data;
+                mensajes.appendChild(p);
+
+                // Opcional: Desplazar automáticamente hacia abajo para ver el último mensaje
+                mensajes.scrollTop = mensajes.scrollHeight;
+            };
+
+            socket.onerror = (err) => {
+                alert("Error en conexión");
+                console.error(err);
+                isConnected = false;
+                // apodoInput.addEventListener('keypress', handlePreConnectEnter);
+                // salaInput.addEventListener('keypress', handlePreConnectEnter);
+                // claveInput.addEventListener('keypress', handlePreConnectEnter);
+            };
+
+            socket.onclose = () => {
+                isConnected = false;
+                // apodoInput.addEventListener('keypress', handlePreConnectEnter);
+                // salaInput.addEventListener('keypress', handlePreConnectEnter);
+                // claveInput.addEventListener('keypress', handlePreConnectEnter);
+            };
+        }
+
+        function enviarMensaje() {
+            const input = document.getElementById("mensaje");
+            // Asegurarse de que el socket esté listo y el mensaje no esté vacío
+            if (socket && socket.readyState === WebSocket.OPEN && input.value.trim() !== "") {
+                socket.send(input.value);
+                input.value = "";
+            } else if (input.value.trim() === "") {
+                alert("No puedes enviar un mensaje vacío.");
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>
