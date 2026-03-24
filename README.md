@@ -1,4 +1,4 @@
-# 🚀 Hermes: Real-Time Chat System
+# 🚀 Hermes: Chat en Tiempo Real
 
 **Hermes** es una aplicación de chat en tiempo real diseñada con una arquitectura cliente-servidor, enfocada en la eficiencia del manejo de mensajes y la gestión de salas dinámicas. Este proyecto fue desarrollado para explorar la concurrencia y la comunicación bidireccional en entornos de red.
 
